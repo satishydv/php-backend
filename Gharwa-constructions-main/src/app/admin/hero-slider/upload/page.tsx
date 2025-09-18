@@ -83,7 +83,8 @@ export default function UploadHeroSliderPage() {
       }
 
       // Upload the image
-      const response = await fetch('/api/admin/hero-slider/upload-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/hero-slider/upload-image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

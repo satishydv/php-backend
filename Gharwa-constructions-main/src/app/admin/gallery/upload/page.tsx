@@ -65,7 +65,8 @@ export default function UploadGalleryPage() {
       }
 
       // Upload image using API
-      const response = await fetch('/api/admin/gallery/upload-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/gallery/upload-image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

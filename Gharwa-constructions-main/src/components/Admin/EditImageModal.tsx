@@ -127,7 +127,8 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
       const formData = new FormData();
       formData.append('filename', filename);
       
-      const response = await fetch('/api/admin/gallery/delete-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/gallery/delete-image`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -154,7 +155,8 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
         throw new Error('Authentication required. Please log in again.');
       }
 
-      const response = await fetch('/api/admin/gallery/update-metadata', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/gallery/update-metadata`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -194,7 +196,8 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
       uploadFormData.append('name', name);
       uploadFormData.append('alt', alt);
       
-      const response = await fetch('/api/admin/gallery/upload-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/gallery/upload-image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

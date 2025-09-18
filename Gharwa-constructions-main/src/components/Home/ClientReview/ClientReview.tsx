@@ -43,7 +43,8 @@ const ClientReview = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch('/api/reviews');
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/reviews`);
         const data = await response.json();
         
         if (response.ok) {

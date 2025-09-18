@@ -22,7 +22,8 @@ const Hero = () => {
   useEffect(() => {
     const fetchHeroImages = async () => {
       try {
-        const response = await fetch('/api/hero-images/')
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/hero-images`)
         if (response.ok) {
           const data = await response.json()
           setImages(data)

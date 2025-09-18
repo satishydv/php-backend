@@ -128,7 +128,8 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
       const formData = new FormData();
       formData.append('filename', filename);
       
-      const response = await fetch('/api/admin/hero-slider/delete-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/hero-slider/delete-image`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -155,7 +156,8 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
         throw new Error('Authentication required. Please log in again.');
       }
 
-      const response = await fetch('/api/admin/hero-slider/update-metadata', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/hero-slider/update-metadata`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -195,7 +197,8 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
       uploadFormData.append('name', name);
       uploadFormData.append('alt', alt);
       
-      const response = await fetch('/api/admin/hero-slider/upload-image', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/hero-slider/upload-image`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

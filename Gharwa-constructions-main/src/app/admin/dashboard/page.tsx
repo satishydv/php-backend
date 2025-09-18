@@ -35,8 +35,10 @@ export default function DashboardPage() {
       try {
         const token = localStorage.getItem('token');
         
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        
         // Fetch reviews stats
-        const reviewsResponse = await fetch('/api/admin/reviews?limit=1000', {
+        const reviewsResponse = await fetch(`${apiUrl}/admin/reviews?limit=1000`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -64,7 +66,7 @@ export default function DashboardPage() {
         }
 
         // Fetch gallery images count
-        const galleryResponse = await fetch('/api/gallery-images');
+        const galleryResponse = await fetch(`${apiUrl}/gallery-images`);
         const galleryData = await galleryResponse.json();
         if (galleryResponse.ok) {
           setStats(prev => ({
@@ -74,7 +76,7 @@ export default function DashboardPage() {
         }
 
         // Fetch hero images count
-        const heroResponse = await fetch('/api/hero-images');
+        const heroResponse = await fetch(`${apiUrl}/hero-images`);
         const heroData = await heroResponse.json();
         if (heroResponse.ok) {
           setStats(prev => ({

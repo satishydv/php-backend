@@ -26,7 +26,8 @@ export default function AdminGalleryPage() {
   const fetchGalleryImages = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/gallery-images');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/gallery-images`);
       if (response.ok) {
         const data = await response.json();
         // Filter out images with empty URLs and add fallback URLs

@@ -73,7 +73,8 @@ export default function AdminLayout({
         
         // Fetch user information
         try {
-          const response = await fetch('/api/auth/me', {
+          const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+          const response = await fetch(`${apiUrl}/auth/me`, {
             headers: {
               'Authorization': `Bearer ${token}`,
               'Content-Type': 'application/json'

@@ -61,7 +61,8 @@ const ContactPage = () => {
         reviewFormData.append('profileImage', selectedFile);
       }
 
-      const response = await fetch('/api/reviews', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/reviews`, {
         method: 'POST',
         body: reviewFormData,
       });

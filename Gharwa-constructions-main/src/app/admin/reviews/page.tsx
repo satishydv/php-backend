@@ -65,7 +65,8 @@ export default function ReviewsPage() {
         return;
       }
       
-      let url = `/api/admin/reviews?page=${page}&limit=${pagination.limit}`;
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      let url = `${apiUrl}/admin/reviews?page=${page}&limit=${pagination.limit}`;
       if (status) url += `&status=${status}`;
       
       const response = await fetch(url, {
@@ -123,7 +124,8 @@ export default function ReviewsPage() {
   const handleStatusChange = async (reviewId: number, newStatus: 'active' | 'inactive') => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('/api/admin/reviews', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/reviews`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -160,7 +162,8 @@ export default function ReviewsPage() {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`/api/admin/reviews?id=${reviewId}`, {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/admin/reviews?id=${reviewId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,

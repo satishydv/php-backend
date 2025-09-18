@@ -27,7 +27,8 @@ export default function AdminHeroSliderPage() {
   const fetchHeroImages = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch('/api/hero-images');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/hero-images`);
       if (response.ok) {
         const data = await response.json();
         // Filter out images with empty URLs and add fallback URLs

@@ -23,7 +23,8 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGalleryImages = async () => {
       try {
-        const response = await fetch('/api/gallery-images/')
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/gallery-images`)
         if (response.ok) {
           const data = await response.json()
           setGalleryImages(data)
