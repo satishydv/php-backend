@@ -164,9 +164,10 @@ export default function AdminGalleryPage() {
           return;
         }
 
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
         // Delete each selected image
         const deletePromises = selectedImages.map(async (id) => {
-          const response = await fetch(`/api/admin/gallery?id=${id}`, {
+          const response = await fetch(`${apiUrl}/admin/gallery/delete?id=${id}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -205,7 +206,8 @@ export default function AdminGalleryPage() {
           return;
         }
 
-        const response = await fetch(`/api/admin/gallery?id=${id}`, {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/admin/gallery/delete?id=${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,

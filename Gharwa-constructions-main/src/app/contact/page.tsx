@@ -4,6 +4,7 @@ import { IoIosTime } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { MdOutlineMail } from "react-icons/md";
+import Image from 'next/image';
 
 const ContactPage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -100,8 +101,9 @@ const ContactPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           
           {/* Left Column - Contact Information */}
-          <div className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg">
-            <div className="space-y-8">
+          {/* Left Column - Contact Information */}
+          <div className="p-8">
+            <div className="space-y-5">
               
               {/* Call Us */}
               <div className="flex items-start space-x-4">
@@ -113,7 +115,7 @@ const ContactPage = () => {
                     CALL US
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    +91 9939129921, +91 8877096309
+                    +91 8340265398
                   </p>
                 </div>
               </div>
@@ -127,13 +129,12 @@ const ContactPage = () => {
                     EMAIL
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    gharwadevelopment@gmail.com
+                    support@gharwadevelopment.com
                   </p>
                 </div>
               </div>
-
-              {/* Location */}
-              <div className="flex items-start space-x-4">
+               {/* Location */}
+               <div className="flex items-start space-x-4">
                 <div className="text-orange-500 text-2xl mt-1">
                   <FaLocationDot />
                 </div>
@@ -142,33 +143,16 @@ const ContactPage = () => {
                     LOCATION
                   </h3>
                   <p className="text-gray-600 dark:text-gray-300">
-                    Gharwa Development, Ranchi, Jharkhand, India
+                    Kisaan Complex, Near Block Chowk, Ormanjhi, Ranchi
                   </p>
                 </div>
               </div>
 
-              {/* Business Hours */}
-              <div className="flex items-start space-x-4">
-                <div className="text-orange-500 text-2xl mt-1">
-                  <IoIosTime />
-                </div>
-                <div>
-                  <h3 className="font-bold text-lg text-gray-800 dark:text-white mb-2">
-                    BUSINESS HOURS
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    Mon - Fri...... 10 am - 8 pm<br />
-                    Sat, Sun........ Closed
-                  </p>
-                </div>
-              </div>
-            </div>
+               {/* Contact Image */}
+               <Image src="/contact.jpg" alt="Contact us illustration" width={500} height={200} className='w-full h-auto rounded-lg' />
 
-            {/* Footer Text */}
-            <div className="mt-12 pt-6 border-t border-gray-300 dark:border-gray-600">
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Gharwa Development, Ranchi, Jharkhand, India
-              </p>
+             
+
             </div>
           </div>
 
@@ -312,10 +296,10 @@ const ContactPage = () => {
             </form>
           </div>
         </div>
-        <div className="w-full mt-10">
-          <div className="relative">
+        <div className="mt-10">
+          <div className="relative w-full overflow-hidden rounded-lg">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1251.390676645786!2d85.44266134033596!3d23.456793861409107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4fb7a800b7671%3A0xd18b8aef255bd1db!2sALIBROS%20WELFARE%20TRUST!5e0!3m2!1sen!2sin!4v1756787307682!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.6773810218974!2d85.46672077478361!3d23.472098999404558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f4fb3f1f1adb2b%3A0xf996dbc9b9b4c540!2sKisaan%20Complex!5e0!3m2!1sen!2sin!4v1758082645636!5m2!1sen!2sin" 
               width="100%" 
               height="600" 
               style={{border:0}} 

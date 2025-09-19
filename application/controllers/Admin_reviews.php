@@ -7,14 +7,15 @@ class Admin_reviews extends CI_Controller {
         parent::__construct();
         $this->load->model('Review_model');
         $this->load->library('Jwt_helper');
+        $this->load->config('env');
         $this->setup_cors();
     }
     
     private function setup_cors() {
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Allow-Origin: ' . $this->config->item('frontend_url'));
+        header('Access-Control-Allow-Methods: ' . $this->config->item('cors_methods'));
+        header('Access-Control-Allow-Headers: ' . $this->config->item('cors_headers'));
         
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             exit();
@@ -42,12 +43,22 @@ class Admin_reviews extends CI_Controller {
     
     /**
      * GET /api/admin/reviews - Get all reviews with pagination and filtering
+     * PUT /api/admin/reviews - Update review status
+     * DELETE /api/admin/reviews?id=123 - Delete review
      */
     public function index() {
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $this->get_reviews();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+            $this->update_status();
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $this->delete();
+        } else {
             $this->output->set_status_header(405)->set_output(json_encode(['error' => 'Method not allowed']));
-            return;
         }
+    }
+    
+    private function get_reviews() {
         
         // Verify admin authentication
         $auth_result = $this->verify_admin_auth();
@@ -66,8 +77,18 @@ class Admin_reviews extends CI_Controller {
             $reviews = $this->Review_model->get_all($page, $limit, $status);
             $total = $this->Review_model->count_all($status);
             
+            // Add full URLs to profile images
+            $reviews_with_urls = array_map(function($review) {
+                if ($review['profile_image']) {
+                    $review['profile_image_url'] = $this->config->item('base_url') . "public/" . $review['profile_image'];
+                } else {
+                    $review['profile_image_url'] = null;
+                }
+                return $review;
+            }, $reviews);
+            
             $response = [
-                'reviews' => $reviews,
+                'reviews' => $reviews_with_urls,
                 'pagination' => [
                     'page' => $page,
                     'limit' => $limit,

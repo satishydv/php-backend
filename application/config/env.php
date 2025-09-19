@@ -1,14 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-/*
-|--------------------------------------------------------------------------
-| Environment Configuration
-|--------------------------------------------------------------------------
-| This file contains environment-specific configuration values
-| that should be used instead of hardcoding values in the application.
-|
-*/
+
 
 // Database Configuration
 $config['db_hostname'] = 'localhost';

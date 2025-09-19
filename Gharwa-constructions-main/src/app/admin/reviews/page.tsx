@@ -29,6 +29,7 @@ interface Review {
   message: string;
   rating: number;
   profile_image: string | null;
+  profile_image_url: string | null;
   status: 'pending' | 'active' | 'inactive';
   created_at: string;
   updated_at: string;
@@ -320,9 +321,9 @@ export default function ReviewsPage() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
                         <div className="flex items-center gap-2">
-                          {review.profile_image ? (
+                          {review.profile_image_url ? (
                             <img
-                              src={`/${review.profile_image}`}
+                              src={review.profile_image_url}
                               alt={review.name}
                               className="w-10 h-10 rounded-full object-cover"
                             />

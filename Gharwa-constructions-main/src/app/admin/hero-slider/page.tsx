@@ -171,9 +171,10 @@ export default function AdminHeroSliderPage() {
           return;
         }
 
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
         // Delete each selected image
         const deletePromises = selectedImages.map(async (id) => {
-          const response = await fetch(`/api/admin/hero-slider?id=${id}`, {
+          const response = await fetch(`${apiUrl}/admin/hero-slider/delete?id=${id}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -212,7 +213,8 @@ export default function AdminHeroSliderPage() {
           return;
         }
 
-        const response = await fetch(`/api/admin/hero-slider?id=${id}`, {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/admin/hero-slider/delete?id=${id}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,

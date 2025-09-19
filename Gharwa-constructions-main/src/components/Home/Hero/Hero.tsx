@@ -12,6 +12,7 @@ interface HeroImage {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  url: string;
 }
 
 const Hero = () => {
@@ -31,18 +32,18 @@ const Hero = () => {
           console.error('Failed to fetch hero images')
           // Fallback to hardcoded images if API fails - using actual images from public/Hero folder
           setImages([
-            { id: 1, filename: 'h.webp', name: 'Construction Site 1', alt_text: 'Construction Site 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '' },
-            { id: 2, filename: 'istockphoto-1280697755-612x612.jpg', name: 'Construction Site 2', alt_text: 'Construction site view 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '' },
-            { id: 3, filename: 'p-9.jpg', name: 'Construction Site 3', alt_text: 'Construction site view 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '' }
+            { id: 1, filename: 'h.webp', name: 'Construction Site 1', alt_text: 'Construction Site 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '', url: '/Hero/h.webp' },
+            { id: 2, filename: 'istockphoto-1280697755-612x612.jpg', name: 'Construction Site 2', alt_text: 'Construction site view 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '', url: '/Hero/istockphoto-1280697755-612x612.jpg' },
+            { id: 3, filename: 'p-9.jpg', name: 'Construction Site 3', alt_text: 'Construction site view 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '', url: '/Hero/p-9.jpg' }
           ])
         }
       } catch (error) {
         console.error('Error fetching hero images:', error)
         // Fallback to hardcoded images if API fails - using actual images from public/Hero folder
         setImages([
-          { id: 1, filename: 'h.webp', name: 'Construction Site 1', alt_text: 'Construction Site 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '' },
-          { id: 2, filename: 'istockphoto-1280697755-612x612.jpg', name: 'Construction Site 2', alt_text: 'Construction site view 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '' },
-          { id: 3, filename: 'p-9.jpg', name: 'Construction Site 3', alt_text: 'Construction site view 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '' }
+          { id: 1, filename: 'h.webp', name: 'Construction Site 1', alt_text: 'Construction Site 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '', url: '/Hero/h.webp' },
+          { id: 2, filename: 'istockphoto-1280697755-612x612.jpg', name: 'Construction Site 2', alt_text: 'Construction site view 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '', url: '/Hero/istockphoto-1280697755-612x612.jpg' },
+          { id: 3, filename: 'p-9.jpg', name: 'Construction Site 3', alt_text: 'Construction site view 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '', url: '/Hero/p-9.jpg' }
         ])
       } finally {
         setLoading(false)
@@ -77,7 +78,7 @@ const Hero = () => {
         {images.map((image, idx) => (
           <Image
             key={image.id}
-            src={`/Hero/${image.filename}`}
+            src={image.url || `/Hero/${image.filename}`}
             alt={image.alt_text}
             fill
             priority={idx === 0}

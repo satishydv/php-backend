@@ -6,14 +6,15 @@ class Hero extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('Hero_image_model');
+        $this->load->config('env');
         $this->setup_cors();
     }
     
     private function setup_cors() {
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Allow-Origin: ' . $this->config->item('frontend_url'));
+        header('Access-Control-Allow-Methods: ' . $this->config->item('cors_methods'));
+        header('Access-Control-Allow-Headers: ' . $this->config->item('cors_headers'));
         
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             exit();
@@ -36,7 +37,7 @@ class Hero extends CI_Controller {
             $images_with_url = array_map(function($image) {
                 return [
                     ...$image,
-                    'url' => "/Hero/{$image['filename']}",
+                    'url' => $this->config->item('base_url') . "public/Hero/{$image['filename']}",
                     'alt' => $image['alt_text'] ?: $image['name'] ?: 'Hero image',
                     'is_active' => (bool)$image['is_active']
                 ];

@@ -7,14 +7,15 @@ class Admin_hero_upload extends CI_Controller {
         parent::__construct();
         $this->load->model('Hero_image_model');
         $this->load->library('Jwt_helper');
+        $this->load->config('env');
         $this->setup_cors();
     }
     
     private function setup_cors() {
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: http://localhost:3000');
-        header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-        header('Access-Control-Allow-Headers: Content-Type, Authorization');
+        header('Access-Control-Allow-Origin: ' . $this->config->item('frontend_url'));
+        header('Access-Control-Allow-Methods: ' . $this->config->item('cors_methods'));
+        header('Access-Control-Allow-Headers: ' . $this->config->item('cors_headers'));
         
         if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
             exit();
@@ -136,7 +137,7 @@ class Admin_hero_upload extends CI_Controller {
                     'message' => $is_update ? 'Hero image updated successfully' : 'Hero image uploaded successfully',
                     'imageId' => $db_image_id,
                     'filename' => $filename,
-                    'url' => "/Hero/{$filename}",
+                    'url' => $this->config->item('base_url') . "public/Hero/{$filename}",
                     'isUpdate' => $is_update
                 ];
                 $this->output->set_status_header(200)->set_output(json_encode($response));

@@ -80,6 +80,7 @@ $route['api/gallery-images'] = 'gallery/list';
 $route['api/admin/gallery'] = 'admin_gallery/index';
 $route['api/admin/gallery/update'] = 'admin_gallery/update';
 $route['api/admin/gallery/delete'] = 'admin_gallery/delete';
+$route['api/admin/gallery/delete-image'] = 'admin_gallery/delete_image';
 $route['api/admin/gallery/upload-image'] = 'admin_gallery_upload/upload_image';
 
 // Hero routes
@@ -89,4 +90,5 @@ $route['api/hero-images'] = 'hero/list';
 $route['api/admin/hero-slider'] = 'admin_hero/index';
 $route['api/admin/hero-slider/update'] = 'admin_hero/update';
 $route['api/admin/hero-slider/delete'] = 'admin_hero/delete';
+$route['api/admin/hero-slider/delete-image'] = 'admin_hero/delete_image';
 $route['api/admin/hero-slider/upload-image'] = 'admin_hero_upload/upload_image';

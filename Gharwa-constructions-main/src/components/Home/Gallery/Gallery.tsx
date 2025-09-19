@@ -12,6 +12,7 @@ interface GalleryImage {
   is_active: boolean;
   created_at: string;
   updated_at: string;
+  url: string;
 }
 
 const Gallery = () => {
@@ -32,26 +33,26 @@ const Gallery = () => {
           console.error('Failed to fetch gallery images')
           // Fallback to hardcoded images if API fails - using actual images from public/Gallery folder
           setGalleryImages([
-            { id: 1, filename: 'gallery-1.jpg', name: 'Gallery 1', alt_text: 'Gallery image 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '' },
-            { id: 2, filename: 'gallery-2.jpg', name: 'Gallery 2', alt_text: 'Gallery image 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '' },
-            { id: 3, filename: 'gallery-3.jpg', name: 'Gallery 3', alt_text: 'Gallery image 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '' },
-            { id: 4, filename: 'gallery-5.webp', name: 'Gallery 4', alt_text: 'Gallery image 4', description: '', display_order: 4, is_active: true, created_at: '', updated_at: '' },
-            { id: 5, filename: 'gallery-6.webp', name: 'Gallery 5', alt_text: 'Gallery image 5', description: '', display_order: 5, is_active: true, created_at: '', updated_at: '' },
-            { id: 6, filename: 'gallery-7.webp', name: 'Gallery 6', alt_text: 'Gallery image 6', description: '', display_order: 6, is_active: true, created_at: '', updated_at: '' },
-            { id: 7, filename: 'p-1.jpg', name: 'Gallery 7', alt_text: 'Gallery image 7', description: '', display_order: 7, is_active: true, created_at: '', updated_at: '' }
+            { id: 1, filename: 'gallery-1.jpg', name: 'Gallery 1', alt_text: 'Gallery image 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-1.jpg' },
+            { id: 2, filename: 'gallery-2.jpg', name: 'Gallery 2', alt_text: 'Gallery image 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-2.jpg' },
+            { id: 3, filename: 'gallery-3.jpg', name: 'Gallery 3', alt_text: 'Gallery image 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-3.jpg' },
+            { id: 4, filename: 'gallery-5.webp', name: 'Gallery 4', alt_text: 'Gallery image 4', description: '', display_order: 4, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-5.webp' },
+            { id: 5, filename: 'gallery-6.webp', name: 'Gallery 5', alt_text: 'Gallery image 5', description: '', display_order: 5, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-6.webp' },
+            { id: 6, filename: 'gallery-7.webp', name: 'Gallery 6', alt_text: 'Gallery image 6', description: '', display_order: 6, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-7.webp' },
+            { id: 7, filename: 'p-1.jpg', name: 'Gallery 7', alt_text: 'Gallery image 7', description: '', display_order: 7, is_active: true, created_at: '', updated_at: '', url: '/Gallery/p-1.jpg' }
           ])
         }
       } catch (error) {
         console.error('Error fetching gallery images:', error)
         // Fallback to hardcoded images if API fails - using actual images from public/Gallery folder
         setGalleryImages([
-          { id: 1, filename: 'gallery-1.jpg', name: 'Gallery 1', alt_text: 'Gallery image 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '' },
-          { id: 2, filename: 'gallery-2.jpg', name: 'Gallery 2', alt_text: 'Gallery image 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '' },
-          { id: 3, filename: 'gallery-3.jpg', name: 'Gallery 3', alt_text: 'Gallery image 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '' },
-          { id: 4, filename: 'gallery-5.webp', name: 'Gallery 4', alt_text: 'Gallery image 4', description: '', display_order: 4, is_active: true, created_at: '', updated_at: '' },
-          { id: 5, filename: 'gallery-6.webp', name: 'Gallery 5', alt_text: 'Gallery image 5', description: '', display_order: 5, is_active: true, created_at: '', updated_at: '' },
-          { id: 6, filename: 'gallery-7.webp', name: 'Gallery 6', alt_text: 'Gallery image 6', description: '', display_order: 6, is_active: true, created_at: '', updated_at: '' },
-          { id: 7, filename: 'p-1.jpg', name: 'Gallery 7', alt_text: 'Gallery image 7', description: '', display_order: 7, is_active: true, created_at: '', updated_at: '' }
+          { id: 1, filename: 'gallery-1.jpg', name: 'Gallery 1', alt_text: 'Gallery image 1', description: '', display_order: 1, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-1.jpg' },
+          { id: 2, filename: 'gallery-2.jpg', name: 'Gallery 2', alt_text: 'Gallery image 2', description: '', display_order: 2, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-2.jpg' },
+          { id: 3, filename: 'gallery-3.jpg', name: 'Gallery 3', alt_text: 'Gallery image 3', description: '', display_order: 3, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-3.jpg' },
+          { id: 4, filename: 'gallery-5.webp', name: 'Gallery 4', alt_text: 'Gallery image 4', description: '', display_order: 4, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-5.webp' },
+          { id: 5, filename: 'gallery-6.webp', name: 'Gallery 5', alt_text: 'Gallery image 5', description: '', display_order: 5, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-6.webp' },
+          { id: 6, filename: 'gallery-7.webp', name: 'Gallery 6', alt_text: 'Gallery image 6', description: '', display_order: 6, is_active: true, created_at: '', updated_at: '', url: '/Gallery/gallery-7.webp' },
+          { id: 7, filename: 'p-1.jpg', name: 'Gallery 7', alt_text: 'Gallery image 7', description: '', display_order: 7, is_active: true, created_at: '', updated_at: '', url: '/Gallery/p-1.jpg' }
         ])
       } finally {
         setLoading(false)
@@ -113,7 +114,7 @@ const Gallery = () => {
             >
               <div className="aspect-square relative">
                 <Image
-                  src={`/Gallery/${image.filename}`}
+                  src={image.url || `/Gallery/${image.filename}`}
                   alt={image.alt_text}
                   fill
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
@@ -136,7 +137,7 @@ const Gallery = () => {
 
       {/* Gallery Modal */}
       <GalleryModal
-        images={galleryImages.map(img => `/Gallery/${img.filename}`)}
+        images={galleryImages.map(img => img.url || `/Gallery/${img.filename}`)}
         currentImageIndex={selectedImageIndex}
         isOpen={isModalOpen}
         onClose={handleCloseModal}

@@ -32,6 +32,7 @@ interface ReviewData {
     message: string;
     rating: number;
     profile_image: string | null;
+    profile_image_url: string | null;
     created_at: string;
 }
 
@@ -138,7 +139,7 @@ const ClientReview = () => {
                         heading={review.subject || 'Review'}
                         review={review.message}
                         rating={review.rating}
-                        avatar={review.profile_image || '/images/c1.png'}
+                        avatar={review.profile_image_url || review.profile_image || '/images/c1.png'}
                     />
                 ))}
             </Carousel>
