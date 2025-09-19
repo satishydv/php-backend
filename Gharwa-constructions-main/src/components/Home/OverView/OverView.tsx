@@ -17,10 +17,10 @@ const OverView = () => {
             
             {/* Blue accent line */}
             <div className="w-20 h-1 bg-yellow-500 mb-8"></div>
-            
+
             <div className="space-y-6 text-gray-700 text-base md:text-lg leading-relaxed text-justify">
-              <p>
-                <span className="text-yellow-500 font-semibold">Gharwa Development</span> is a leading 
+              <p className='text-justify'>
+                <span className="text-yellow-500 font-semibold text-justify">Gharwa Development</span> is a leading 
                 construction company committed to delivering comprehensive building solutions and services. 
                 We specialize in transforming architectural visions into reality through innovative 
                 construction methods that drive efficiency, quality, and sustainable development. With 
@@ -28,7 +28,7 @@ const OverView = () => {
                 end-to-end construction solutions tailored to meet the unique needs of our clients.
               </p>
               
-              <p>
+              <p className='text-justify'>
                 Our services include high-quality residential construction, commercial buildings, 
                 infrastructure development, renovation projects, and a wide range of construction-related 
                 services. At <span className="text-yellow-500 font-semibold">Gharwa Development</span>, 
@@ -36,7 +36,7 @@ const OverView = () => {
                 construction excellence and focused on delivering outstanding results.
               </p>
               
-              <p>
+              <p className='text-justify'>
                 Leveraging the latest construction technologies and best practices, we ensure 
                 timely delivery and scalable solutions that empower our clients to achieve their 
                 construction goals.                 Whether you&apos;re planning a new residential project or an 

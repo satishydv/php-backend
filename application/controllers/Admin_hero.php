@@ -187,12 +187,24 @@ class Admin_hero extends CI_Controller {
             return;
         }
         
-        $this->verify_admin_auth();
+        // Verify admin authentication
+        $auth_result = $this->verify_admin_auth();
+        if (isset($auth_result['error'])) {
+            $this->output->set_status_header($auth_result['status'])->set_output(json_encode(['error' => $auth_result['error']]));
+            return;
+        }
         
         try {
-            $filename = $this->input->post('filename');
+            // Get filename from query parameter
+            $filename = $this->input->get('filename');
+            
+            // Debug logging
+            error_log("Delete hero image request - Filename: " . ($filename ?: 'empty'));
+            error_log("Request method: " . $_SERVER['REQUEST_METHOD']);
+            error_log("Query string: " . ($_SERVER['QUERY_STRING'] ?? 'empty'));
             
             if (empty($filename)) {
+                error_log("Hero filename is empty");
                 $this->output->set_status_header(400)->set_output(json_encode(['error' => 'Filename is required']));
                 return;
             }
@@ -205,22 +217,21 @@ class Admin_hero extends CI_Controller {
                 return;
             }
             
-            // Delete from database
-            $success = $this->Hero_image_model->delete($image['id']);
+            // Only delete the physical file, not the database record
+            $file_path = FCPATH . 'public/Hero/' . $filename;
+            error_log("Attempting to delete hero file: " . $file_path);
             
-            if ($success) {
-                // Delete physical file
-                $file_path = FCPATH . 'public/Hero/' . $filename;
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-                
+            if (file_exists($file_path)) {
+                unlink($file_path);
+                error_log("Hero physical file deleted successfully");
                 $this->output->set_status_header(200)->set_output(json_encode([
-                    'message' => 'Hero image deleted successfully',
-                    'deletedId' => $image['id']
+                    'message' => 'Physical file deleted successfully',
+                    'imageId' => $image['id'],
+                    'filename' => $filename
                 ]));
             } else {
-                $this->output->set_status_header(500)->set_output(json_encode(['error' => 'Failed to delete hero image']));
+                error_log("Hero physical file not found: " . $file_path);
+                $this->output->set_status_header(404)->set_output(json_encode(['error' => 'Physical file not found']));
             }
             
         } catch (Exception $e) {

@@ -1,10 +1,11 @@
 import React from 'react'
 import { FaFacebook, FaInstagram, FaWhatsapp, FaTwitter, FaYoutube } from 'react-icons/fa'
+import { IoCall, IoMail } from "react-icons/io5";
 import Image from 'next/image'
 
 const Footer = () => {
   return (
-    <div className='pt-16 pb-16 bg-yellow-500 dark:bg-gray-900'>
+    <div className='pt-16 pb-16 bg-yellow-500'>
         <div className='w-[90%] md:w-[80%] mx-auto items-start grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10'>
             {/* 1st */}
             <div>
@@ -21,7 +22,7 @@ const Footer = () => {
                     <h1 className='text-xl hidden sm:block md:text-2xl text-white font-bold'>Gharwa Development</h1>
                    
                 </div>
-                 <p className='mt-4 text-gray-200 font-medium'>
+                 <p className='mt-4 text-gray-700 font-medium text-justify'>
             Gharwa Development is a leading construction company committed to delivering comprehensive building solutions and services. We specialize in transforming.
         </p>
         <div className='mt-4 space-x-4 flex items-center'>
@@ -52,26 +53,25 @@ const Footer = () => {
             </div>
             {/* 3rd part */}
             <div className='space-y-5'>
-                <h1 className='text-lg font-bold text-white'>Resource</h1>
-                <p className='footer_link'>About us</p>
-                <p className='footer_link'>News and Press</p>
-                <p className='footer_link'>Our Customers</p>
-                <p className='footer_link'>Leadership</p>
-                <p className='footer_link'>Carress</p>
+                <h1 className='text-lg font-bold text-white'>Services</h1>
+                <p className='footer_link'>Construction & Building</p>
+                <p className='footer_link'>Residential Project Development</p>
+                <p className='footer_link'>Renovation & Remodeling</p>
+                <p className='footer_link'>Custom Home Construction</p>
+                <p className='footer_link'>Architecture Design</p>
 
             </div>
             {/*4th part  */}
             <div className='space-y-5'>
                 <h1 className='text-lg font-bold text-white'>Contact us</h1>
-                <div className='mt-6'>
-                   <h1 className='text-lg font-bold text-white'>Our Mobile Number</h1>
-                     <p className='text-black dark:text-white font-medium'>+91 9939129921</p>
+                <div className='mt-6 flex items-center space-x-2'>
+                    <IoCall className='text-white h-5 w-5' />
+                    <p className='text-black dark:text-white font-medium'>+91 8340265398</p>
                 </div>
-                <div className='mt-6'>
-                   <h1 className='text-lg font-bold text-white'>Our Email</h1>
-                     <p className='text-black dark:text-white font-medium'>gharwadevelopment@gmail.com
-                        </p>
-                        </div>
+                <div className='mt-6 flex items-center space-x-2'>
+                    <span className='text-white text-lg'>✉</span>
+                    <p className='text-black dark:text-white font-medium'>support@gharwadevelopment.com</p>
+                </div>
 
         </div>
         </div>

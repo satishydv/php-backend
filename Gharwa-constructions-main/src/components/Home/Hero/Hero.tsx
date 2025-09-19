@@ -105,24 +105,17 @@ const Hero = () => {
 
           <div className='mt-6 flex flex-wrap items-center gap-3 md:gap-4'>
             <a
-              href='tel:9873824375'
+              href='tel:+91 8340265398'
               className='rounded-md bg-amber-600 px-6 py-3 text-white font-semibold shadow hover:bg-amber-700 transition-colors'
             >
               Call Us
             </a>
 
             <a
-              href='tel:9873824375'
+              href='tel:+91 8340265398'
               className='rounded-md bg-white/10 px-4 py-2 text-white font-semibold backdrop-blur hover:bg-white/15'
             >
-              9873824375
-            </a>
-
-            <a
-              href='tel:8877096309'
-              className='rounded-md bg-white/10 px-4 py-2 text-white font-semibold backdrop-blur hover:bg-white/15'
-            >
-              8877096309
+              +91 8340265398
             </a>
           </div>
         </div>

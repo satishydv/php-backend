@@ -64,8 +64,14 @@ class Admin_hero_upload extends CI_Controller {
             $alt = $this->input->post('alt') ?: '';
             $description = $this->input->post('description') ?: null;
             $order = (int)$this->input->post('order') ?: 1;
-            $image_id = $this->input->post('imageId') ?: null;
+            $image_id = $this->input->post('imageId') ?: $this->input->post('image_id') ?: null;
             $original_filename = $this->input->post('originalFilename') ?: null;
+            
+            // Debug logging
+            error_log("Hero upload request - image_id: " . ($image_id ?: 'null'));
+            error_log("Hero upload request - original_filename: " . ($original_filename ?: 'null'));
+            error_log("Hero upload request - name: " . $name);
+            error_log("Hero upload request - alt: " . $alt);
             
             if (!$image || !$name || !$alt) {
                 $this->output->set_status_header(400)->set_output(json_encode(['error' => 'Missing required fields']));
@@ -114,9 +120,11 @@ class Admin_hero_upload extends CI_Controller {
             
             if ($image_id && $original_filename) {
                 // Image replacement - update existing record
+                error_log("Hero image replacement mode - updating filename: " . $original_filename);
                 $success = $this->Hero_image_model->update_by_filename($original_filename, $image_data);
                 $is_update = true;
                 $db_image_id = $image_id;
+                error_log("Hero image replacement result: " . ($success ? 'success' : 'failed'));
             } else {
                 // Check if filename already exists
                 $existing = $this->Hero_image_model->get_by_filename($filename);

@@ -82,6 +82,7 @@ $route['api/admin/gallery/update'] = 'admin_gallery/update';
 $route['api/admin/gallery/delete'] = 'admin_gallery/delete';
 $route['api/admin/gallery/delete-image'] = 'admin_gallery/delete_image';
 $route['api/admin/gallery/upload-image'] = 'admin_gallery_upload/upload_image';
+$route['api/admin/gallery/test'] = 'admin_gallery/test';
 
 // Hero routes
 $route['api/hero-images'] = 'hero/list';

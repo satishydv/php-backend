@@ -62,8 +62,14 @@ class Admin_gallery_upload extends CI_Controller {
             $image = $_FILES['image'] ?? null;
             $name = $this->input->post('name') ?: '';
             $alt = $this->input->post('alt') ?: '';
-            $image_id = $this->input->post('imageId') ?: null;
+            $image_id = $this->input->post('imageId') ?: $this->input->post('image_id') ?: null;
             $original_filename = $this->input->post('originalFilename') ?: null;
+            
+            // Debug logging
+            error_log("Upload request - image_id: " . ($image_id ?: 'null'));
+            error_log("Upload request - original_filename: " . ($original_filename ?: 'null'));
+            error_log("Upload request - name: " . $name);
+            error_log("Upload request - alt: " . $alt);
             
             if (!$image || !$name || !$alt) {
                 $this->output->set_status_header(400)->set_output(json_encode(['error' => 'Missing required fields']));
@@ -110,9 +116,11 @@ class Admin_gallery_upload extends CI_Controller {
             
             if ($image_id && $original_filename) {
                 // Image replacement - update existing record
+                error_log("Image replacement mode - updating filename: " . $original_filename);
                 $success = $this->Gallery_image_model->update_by_filename($original_filename, $image_data);
                 $is_update = true;
                 $db_image_id = $image_id;
+                error_log("Image replacement result: " . ($success ? 'success' : 'failed'));
             } else {
                 // Check if filename already exists
                 $existing = $this->Gallery_image_model->get_by_filename($filename);

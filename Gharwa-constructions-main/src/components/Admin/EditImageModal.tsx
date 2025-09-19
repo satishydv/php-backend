@@ -65,6 +65,7 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
       // If a new image file is selected, replace the image
       if (selectedFile) {
         try {
+          console.log('About to delete old image, filename:', image.filename);
           // 1. Delete the old image file from public/Gallery folder
           await deleteOldImage(image.filename);
           
@@ -91,7 +92,7 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
       } else {
         // If no new file selected, just update the database with new name/alt
         try {
-          await updateImageMetadata(image.filename, formData.name, formData.alt);
+          await updateImageMetadata(formData.name, formData.alt);
         } catch (error) {
           console.error('Error updating image metadata:', error);
           alert('Failed to update image metadata. Please try again.');
@@ -118,22 +119,24 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
   // Function to delete old image file
   const deleteOldImage = async (filename: string) => {
     try {
+      console.log('deleteOldImage called with filename:', filename);
+      console.log('Full image object:', image);
+      
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Authentication required. Please log in again.');
       }
 
-      // Create a FormData to send the delete request
-      const formData = new FormData();
-      formData.append('filename', filename);
+      // Send filename as query parameter instead of FormData
+      console.log('Sending filename as query parameter:', filename);
       
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-      const response = await fetch(`${apiUrl}/admin/gallery/delete-image`, {
+      const response = await fetch(`${apiUrl}/admin/gallery/delete-image?filename=${encodeURIComponent(filename)}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-        body: formData,
       });
 
       if (!response.ok) {
@@ -148,7 +151,7 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
   };
 
   // Function to update image metadata only
-  const updateImageMetadata = async (filename: string, name: string, alt: string) => {
+  const updateImageMetadata = async (name: string, alt: string) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -156,16 +159,16 @@ export default function EditImageModal({ image, isOpen, onClose, onSave }: EditI
       }
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-      const response = await fetch(`${apiUrl}/admin/gallery/update-metadata`, {
+      const response = await fetch(`${apiUrl}/admin/gallery/update`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          filename,
+          id: image.id, // Use the image ID instead of filename
           name,
-          alt
+          alt_text: alt // Backend expects 'alt_text' not 'alt'
         }),
       });
 

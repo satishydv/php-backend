@@ -31,10 +31,10 @@ export default function AdminGalleryPage() {
       if (response.ok) {
         const data = await response.json();
         // Filter out images with empty URLs and add fallback URLs
-        const processedData = data.map((image: { url?: string; filename: string; alt?: string; name?: string }) => ({
+        const processedData = data.map((image: { url?: string; filename: string; alt_text?: string; alt?: string; name?: string }) => ({
           ...image,
           url: image.url || `/Gallery/${image.filename}`,
-          alt: image.alt || image.name || 'Gallery image'
+          alt: image.alt_text || image.alt || image.name || 'Gallery image'
         })).filter((image: { filename: string }) => image.filename); // Only include images with filenames
         
         setGalleryImages(processedData);
@@ -232,6 +232,8 @@ export default function AdminGalleryPage() {
 
   const handleEditImage = (id: number) => {
     const image = galleryImages.find(img => img.id === id);
+    console.log('Editing image:', image);
+    console.log('Image filename:', image?.filename);
     if (image) {
       setEditingImage(image);
       setIsEditModalOpen(true);

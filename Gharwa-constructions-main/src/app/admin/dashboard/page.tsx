@@ -52,9 +52,32 @@ export default function DashboardPage() {
           const totalReviews = reviews.length;
           const activeReviews = reviews.filter((r: { status: string }) => r.status === 'active').length;
           const pendingReviews = reviews.filter((r: { status: string }) => r.status === 'pending').length;
-          const averageRating = reviews.length > 0 
-            ? (reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) / reviews.length).toFixed(1)
+          
+          // Debug: Log the reviews data to see what's in the rating field
+          console.log('Reviews data:', reviews);
+          console.log('Rating values:', reviews.map((r: any) => ({ id: r.id, rating: r.rating, ratingType: typeof r.rating })));
+          
+          // More robust average rating calculation
+          let validRatings = 0;
+          let totalRatingSum = 0;
+          
+          reviews.forEach((r: { rating: number; id: any }) => {
+            const rating = parseFloat(r.rating) || 0;
+            if (rating >= 1 && rating <= 5) {
+              totalRatingSum += rating;
+              validRatings++;
+            } else {
+              console.warn(`Invalid rating found: ${r.rating} for review ${r.id}`);
+            }
+          });
+          
+          const averageRating = validRatings > 0 
+            ? (totalRatingSum / validRatings).toFixed(1)
             : 0;
+            
+          console.log(`Total rating sum: ${totalRatingSum}, Valid ratings count: ${validRatings}, Average: ${averageRating}`);
+            
+          console.log('Calculated average rating:', averageRating);
 
           setStats(prev => ({
             ...prev,
@@ -177,7 +200,9 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-white/90 mb-1">{stat.title}</p>
-                <p className="text-3xl font-semibold text-white">{stat.value}</p>
+                <p className="text-3xl font-semibold text-white">
+                  {stat.title === 'Average Rating' ? `${stat.value}/5` : stat.value}
+                </p>
                 <p className="text-xs text-white/80 mt-1">{stat.description}</p>
               </div>
               <div className="p-3 rounded-full bg-white/20">

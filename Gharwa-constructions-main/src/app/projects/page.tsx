@@ -88,7 +88,7 @@ const ProjectsPage = () => {
               <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 mb-6">
                 Discover Our Completed Projects
               </h1>
-              <p className="text-lg text-gray-600 leading-relaxed max-w-3xl">
+              <p className="text-lg text-gray-600 leading-relaxed max-w-3xl text-justify">
                 Every project we complete is a reflection of our commitment to quality, precision, and client satisfaction. 
                 At Garhwa Construction, we take pride in transforming ideas into built reality.
               </p>
@@ -118,7 +118,7 @@ const ProjectsPage = () => {
                   {project.title}
                 </h3>
                 
-                <p className="text-gray-600 mb-4 leading-relaxed">
+                <p className="text-gray-600 mb-4 leading-relaxed text-justify">
                   {project.description}
                 </p>
                 

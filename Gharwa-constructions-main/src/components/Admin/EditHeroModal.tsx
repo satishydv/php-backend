@@ -92,7 +92,7 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
       } else {
         // If no new file selected, just update the database with new name/alt
         try {
-          await updateImageMetadata(image.filename, formData.name, formData.alt);
+          await updateImageMetadata(formData.name, formData.alt);
         } catch (error) {
           console.error('Error updating hero image metadata:', error);
           alert('Failed to update hero image metadata. Please try again.');
@@ -124,17 +124,16 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
         throw new Error('Authentication required. Please log in again.');
       }
 
-      // Create a FormData to send the delete request
-      const formData = new FormData();
-      formData.append('filename', filename);
+      // Send filename as query parameter instead of FormData
+      console.log('Sending hero filename as query parameter:', filename);
       
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-      const response = await fetch(`${apiUrl}/admin/hero-slider/delete-image`, {
+      const response = await fetch(`${apiUrl}/admin/hero-slider/delete-image?filename=${encodeURIComponent(filename)}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
         },
-        body: formData,
       });
 
       if (!response.ok) {
@@ -149,7 +148,7 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
   };
 
   // Function to update image metadata only
-  const updateImageMetadata = async (filename: string, name: string, alt: string) => {
+  const updateImageMetadata = async (name: string, alt: string) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -157,16 +156,16 @@ export default function EditHeroModal({ image, isOpen, onClose, onSave }: EditHe
       }
 
       const apiUrl = process.env.NEXT_PUBLIC_API_URL || '/api';
-      const response = await fetch(`${apiUrl}/admin/hero-slider/update-metadata`, {
+      const response = await fetch(`${apiUrl}/admin/hero-slider/update`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          filename,
+          id: image.id, // Use the image ID instead of filename
           name,
-          alt
+          alt_text: alt // Backend expects 'alt_text' not 'alt'
         }),
       });
 

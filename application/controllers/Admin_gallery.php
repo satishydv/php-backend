@@ -183,44 +183,67 @@ class Admin_gallery extends CI_Controller {
             return;
         }
         
-        $this->verify_admin_auth();
+        // Verify admin authentication
+        $auth_result = $this->verify_admin_auth();
+        if (isset($auth_result['error'])) {
+            $this->output->set_status_header($auth_result['status'])->set_output(json_encode(['error' => $auth_result['error']]));
+            return;
+        }
         
         try {
-            $filename = $this->input->post('filename');
+            // Get filename from query parameter
+            $filename = $this->input->get('filename');
+            
+            // Debug logging (can be removed in production)
+            error_log("Delete image request - Filename: " . ($filename ?: 'empty'));
             
             if (empty($filename)) {
+                error_log("Filename is empty");
                 $this->output->set_status_header(400)->set_output(json_encode(['error' => 'Filename is required']));
                 return;
             }
             
             // Find image by filename
             $image = $this->Gallery_image_model->get_by_filename($filename);
+            error_log("Image lookup result: " . json_encode($image));
             
             if (!$image) {
+                error_log("Image not found for filename: " . $filename);
                 $this->output->set_status_header(404)->set_output(json_encode(['error' => 'Image not found']));
                 return;
             }
             
-            // Delete from database
-            $success = $this->Gallery_image_model->delete($image['id']);
+            // Only delete the physical file, not the database record
+            $file_path = FCPATH . 'public/Gallery/' . $filename;
+            error_log("Attempting to delete file: " . $file_path);
             
-            if ($success) {
-                // Delete physical file
-                $file_path = FCPATH . 'public/Gallery/' . $filename;
-                if (file_exists($file_path)) {
-                    unlink($file_path);
-                }
-                
+            if (file_exists($file_path)) {
+                unlink($file_path);
+                error_log("Physical file deleted successfully");
                 $this->output->set_status_header(200)->set_output(json_encode([
-                    'message' => 'Image deleted successfully',
-                    'deletedId' => $image['id']
+                    'message' => 'Physical file deleted successfully',
+                    'imageId' => $image['id'],
+                    'filename' => $filename
                 ]));
             } else {
-                $this->output->set_status_header(500)->set_output(json_encode(['error' => 'Failed to delete image']));
+                error_log("Physical file not found: " . $file_path);
+                $this->output->set_status_header(404)->set_output(json_encode(['error' => 'Physical file not found']));
             }
             
         } catch (Exception $e) {
-            $this->output->set_status_header(500)->set_output(json_encode(['error' => 'Failed to delete image']));
+            error_log("Exception in delete_image: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
+            $this->output->set_status_header(500)->set_output(json_encode(['error' => 'Failed to delete image: ' . $e->getMessage()]));
         }
+    }
+    
+    /**
+     * Test endpoint to verify API is working
+     */
+    public function test() {
+        $this->output->set_status_header(200)->set_output(json_encode([
+            'message' => 'Admin Gallery API is working',
+            'timestamp' => date('Y-m-d H:i:s')
+        ]));
     }
 }

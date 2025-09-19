@@ -19,7 +19,7 @@ const page = () => {
           <div className="w-20 h-1 bg-yellow-500 mb-8"></div>
           
           <div className="space-y-6 text-gray-700 dark:text-gray-300 text-base md:text-lg leading-relaxed">
-            <p>
+            <p className='text-justify'>
               <span className="text-yellow-500 font-semibold">Gharwa Development Pvt. Ltd.</span> stands at the forefront of modern construction, focusing on innovative techniques, sustainable materials, and smart building solutions. With a team of experienced engineers, architects, and project managers, we are committed to transforming your vision into reality—be it a single-family home, a luxury villa, or a housing complex.
             </p>
           </div>
@@ -35,7 +35,7 @@ const page = () => {
                 <div className="w-2 h-2 bg-yellow-500 rounded-full mt-3 flex-shrink-0"></div>
                 <div>
                   <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Custom Home Construction</h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">Tailored design and construction services to bring your dream home to life, with attention to detail and personalized features.</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base text-justify">Tailored design and construction services to bring your dream home to life, with attention to detail and personalized features.</p>
                 </div>
               </div>
               
@@ -43,7 +43,7 @@ const page = () => {
                 <div className="w-2 h-2 bg-yellow-500 rounded-full mt-3 flex-shrink-0"></div>
                 <div>
                   <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Residential Project Development</h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">From villas to housing societies, our expertise covers all aspects of residential development, ensuring durability, functionality, and style.</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base text-justify">From villas to housing societies, our expertise covers all aspects of residential development, ensuring durability, functionality, and style.</p>
                 </div>
               </div>
               
@@ -51,7 +51,7 @@ const page = () => {
                 <div className="w-2 h-2 bg-yellow-500 rounded-full mt-3 flex-shrink-0"></div>
                 <div>
                   <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Renovation & Remodeling</h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">Comprehensive renovation solutions to modernize and improve existing structures to meet evolving family needs.</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base text-justify">Comprehensive renovation solutions to modernize and improve existing structures to meet evolving family needs.</p>
                 </div>
               </div>
               
@@ -59,7 +59,7 @@ const page = () => {
                 <div className="w-2 h-2 bg-yellow-500 rounded-full mt-3 flex-shrink-0"></div>
                 <div>
                   <h4 className="font-semibold text-gray-800 dark:text-white mb-2">Turnkey Solutions</h4>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base">Complete, hassle-free project management from initial consultations through to final handover, with regular updates and transparent communication.</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base text-justify">Complete, hassle-free project management from initial consultations through to final handover, with regular updates and transparent communication.</p>
                 </div>
               </div>
             </div>
